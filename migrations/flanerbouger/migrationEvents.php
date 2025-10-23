@@ -71,7 +71,7 @@ while ($actualMigrated < $maxId) {
     var_dump('Migrating events after ID: ' . $actualMigrated . ' - Fetched: ' . count($events));
     foreach ($events as $event) {
         $actualMigrated = $event['id'];
-        $placeholders[] = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $placeholders[] = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)';
         if (isset($userMap[$event['user_id']])) {
             $params[] = $userMap[$event['user_id']];
         }else{
@@ -99,11 +99,60 @@ while ($actualMigrated < $maxId) {
         $params[] = $event['end_date'];
         $params[] = $event['start_at'];
         $params[] = $event['end_at'];
-        
+        $params[] = $event['address']; 
+        $params[] = $event['contact_name']; 
+        $params[] = $event['contact_email']; 
+        $params[] = $event['contact_phone']; 
+        $params[] = $event['organisator_email']; 
+        $params[] = $event['organisator_phone'];
+        $params[] = $event['website'];
+        $params[] = $event['facebook_page'];
+        $params[] = $event['source'];
+        $params[] = $event['latitude']; 
+        $params[] = $event['longitude']; 
+        $params[] = $event['cover']; 
+        $params[] = $event['registrationForm'];
+        $params[] = $event['slug'];
+        $params[] = $event['recurrent'];
+        $params[] = $event['recurrence'];
+        $params[] = $event['periode_on'];
         $iteration++;
 
         if ($iteration > 100) {
-            $sql = 'INSERT INTO event (user_id, city_id,category_id,legacy_id,description, title, short_description, status, creation_date, update_date, type, start_date, end_date, start_at, end_at, legacy_adress) VALUES ' . implode(', ', $placeholders);
+            $sql = 'INSERT INTO event (
+             user_id, 
+             city_id, 
+             category_id, 
+             legacy_id, 
+             description, 
+             title, 
+             short_description, 
+             status, 
+             creation_date, 
+             update_date, 
+             type, 
+             start_date, 
+             end_date, 
+             start_at, 
+             end_at, 
+             legacy_adress, 
+             legacy_contact_name, 
+             legacy_contact_email, 
+             legacy_contact_phone, 
+             legacy_organisator_email, 
+             legacy_organisator_phone, 
+             website, 
+             legacy_facebook_page, 
+             source, 
+             legacy_lat, 
+             legacy_lng, 
+             cover, 
+             registration_form, 
+             slug, 
+             is_recurring, 
+             legacy_recurrence, 
+             periode_on) 
+             VALUES ' . implode(', ', $placeholders);
 
             try {
                 $newConnexion->beginTransaction();

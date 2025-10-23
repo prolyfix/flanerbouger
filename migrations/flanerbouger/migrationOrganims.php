@@ -69,7 +69,7 @@ foreach ($organisms as $organism) {
         $iteration++;
     }
     if($iteration > 100){
-        $sql = 'INSERT INTO organism (city_id, name, type, legacy_id, legacy_adress, phone, email, website,creation_date,update_date ) VALUES ' . implode(', ', $placeholders);
+        $sql = 'INSERT INTO organism (city_id, name, type, legacy_id, legacy_adress) VALUES ' . implode(', ', $placeholders);
 
         try {
             $newConnexion->beginTransaction();

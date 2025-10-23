@@ -21,7 +21,7 @@ class Event
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable:true)]
     private ?City $city = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
@@ -75,7 +75,7 @@ class Event
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $legacyContactName = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $legacyContactPhone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -119,6 +119,12 @@ class Event
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $legacyRecurrence = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $recurrence = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $periodeOn = null;
 
     public function getId(): ?int
     {
@@ -541,6 +547,30 @@ class Event
     public function setLegacyRecurrence(?string $legacyRecurrence): static
     {
         $this->legacyRecurrence = $legacyRecurrence;
+
+        return $this;
+    }
+
+    public function getRecurrence(): ?string
+    {
+        return $this->recurrence;
+    }
+
+    public function setRecurrence(?string $recurrence): static
+    {
+        $this->recurrence = $recurrence;
+
+        return $this;
+    }
+
+    public function getPeriodeOn(): ?string
+    {
+        return $this->periodeOn;
+    }
+
+    public function setPeriodeOn(?string $periodeOn): static
+    {
+        $this->periodeOn = $periodeOn;
 
         return $this;
     }
