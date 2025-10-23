@@ -39,9 +39,16 @@ class Location
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'location')]
     private Collection $events;
 
+    /**
+     * @var Collection<int, Organism>
+     */
+    #[ORM\OneToMany(targetEntity: Organism::class, mappedBy: 'location')]
+    private Collection $organisms;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->organisms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +152,36 @@ class Location
             // set the owning side to null (unless already changed)
             if ($event->getLocation() === $this) {
                 $event->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Organism>
+     */
+    public function getOrganisms(): Collection
+    {
+        return $this->organisms;
+    }
+
+    public function addOrganism(Organism $organism): static
+    {
+        if (!$this->organisms->contains($organism)) {
+            $this->organisms->add($organism);
+            $organism->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganism(Organism $organism): static
+    {
+        if ($this->organisms->removeElement($organism)) {
+            // set the owning side to null (unless already changed)
+            if ($organism->getLocation() === $this) {
+                $organism->setLocation(null);
             }
         }
 

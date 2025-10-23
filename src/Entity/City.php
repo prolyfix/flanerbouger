@@ -73,11 +73,18 @@ class City
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $legacyId = null;
 
+    /**
+     * @var Collection<int, Organism>
+     */
+    #[ORM\OneToMany(targetEntity: Organism::class, mappedBy: 'city')]
+    private Collection $organisms;
+
     public function __construct()
     {
         $this->postcodes = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->locations = new ArrayCollection();
+        $this->organisms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -327,6 +334,36 @@ class City
     public function setLegacyId(?string $legacyId): static
     {
         $this->legacyId = $legacyId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Organism>
+     */
+    public function getOrganisms(): Collection
+    {
+        return $this->organisms;
+    }
+
+    public function addOrganism(Organism $organism): static
+    {
+        if (!$this->organisms->contains($organism)) {
+            $this->organisms->add($organism);
+            $organism->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganism(Organism $organism): static
+    {
+        if ($this->organisms->removeElement($organism)) {
+            // set the owning side to null (unless already changed)
+            if ($organism->getCity() === $this) {
+                $organism->setCity(null);
+            }
+        }
 
         return $this;
     }

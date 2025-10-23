@@ -63,6 +63,63 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Location $location = null;
 
+    #[ORM\Column(length: 511, nullable: true)]
+    private ?string $legacyAdress = null;
+
+    #[ORM\ManyToOne]
+    private ?Contact $contact = null;
+
+    #[ORM\ManyToOne]
+    private ?Contact $organisator = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $legacyContactName = null;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $legacyContactPhone = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $legacyContactEmail = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $legacyOrganisatorEmail = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $legacyOrganisatorPhone = null;
+
+    #[ORM\Column(length: 511, nullable: true)]
+    private ?string $website = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $links = null;
+
+    #[ORM\Column(length: 511, nullable: true)]
+    private ?string $legacyFacebookPage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $source = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $legacyLat = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $legacyLng = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $cover = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $registrationForm = null;
+
+    #[ORM\Column(length: 511, nullable: true)]
+    private ?string $slug = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isRecurring = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $legacyRecurrence = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -256,6 +313,234 @@ class Event
     public function setLocation(?Location $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getLegacyAdress(): ?string
+    {
+        return $this->legacyAdress;
+    }
+
+    public function setLegacyAdress(?string $legacyAdress): static
+    {
+        $this->legacyAdress = $legacyAdress;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): static
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    public function getOrganisator(): ?Contact
+    {
+        return $this->organisator;
+    }
+
+    public function setOrganisator(?Contact $organisator): static
+    {
+        $this->organisator = $organisator;
+
+        return $this;
+    }
+
+    public function getLegacyContactName(): ?string
+    {
+        return $this->legacyContactName;
+    }
+
+    public function setLegacyContactName(?string $legacyContactName): static
+    {
+        $this->legacyContactName = $legacyContactName;
+
+        return $this;
+    }
+
+    public function getLegacyContactPhone(): ?string
+    {
+        return $this->legacyContactPhone;
+    }
+
+    public function setLegacyContactPhone(?string $legacyContactPhone): static
+    {
+        $this->legacyContactPhone = $legacyContactPhone;
+
+        return $this;
+    }
+
+    public function getLegacyContactEmail(): ?string
+    {
+        return $this->legacyContactEmail;
+    }
+
+    public function setLegacyContactEmail(?string $legacyContactEmail): static
+    {
+        $this->legacyContactEmail = $legacyContactEmail;
+
+        return $this;
+    }
+
+    public function getLegacyOrganisatorEmail(): ?string
+    {
+        return $this->legacyOrganisatorEmail;
+    }
+
+    public function setLegacyOrganisatorEmail(?string $legacyOrganisatorEmail): static
+    {
+        $this->legacyOrganisatorEmail = $legacyOrganisatorEmail;
+
+        return $this;
+    }
+
+    public function getLegacyOrganisatorPhone(): ?string
+    {
+        return $this->legacyOrganisatorPhone;
+    }
+
+    public function setLegacyOrganisatorPhone(?string $legacyOrganisatorPhone): static
+    {
+        $this->legacyOrganisatorPhone = $legacyOrganisatorPhone;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): static
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    public function getLinks(): ?array
+    {
+        return $this->links;
+    }
+
+    public function setLinks(?array $links): static
+    {
+        $this->links = $links;
+
+        return $this;
+    }
+
+    public function getLegacyFacebookPage(): ?string
+    {
+        return $this->legacyFacebookPage;
+    }
+
+    public function setLegacyFacebookPage(?string $legacyFacebookPage): static
+    {
+        $this->legacyFacebookPage = $legacyFacebookPage;
+
+        return $this;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(?string $source): static
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getLegacyLat(): ?float
+    {
+        return $this->legacyLat;
+    }
+
+    public function setLegacyLat(?float $legacyLat): static
+    {
+        $this->legacyLat = $legacyLat;
+
+        return $this;
+    }
+
+    public function getLegacyLng(): ?float
+    {
+        return $this->legacyLng;
+    }
+
+    public function setLegacyLng(?float $legacyLng): static
+    {
+        $this->legacyLng = $legacyLng;
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?string $cover): static
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getRegistrationForm(): ?string
+    {
+        return $this->registrationForm;
+    }
+
+    public function setRegistrationForm(?string $registrationForm): static
+    {
+        $this->registrationForm = $registrationForm;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isRecurring(): ?bool
+    {
+        return $this->isRecurring;
+    }
+
+    public function setIsRecurring(?bool $isRecurring): static
+    {
+        $this->isRecurring = $isRecurring;
+
+        return $this;
+    }
+
+    public function getLegacyRecurrence(): ?string
+    {
+        return $this->legacyRecurrence;
+    }
+
+    public function setLegacyRecurrence(?string $legacyRecurrence): static
+    {
+        $this->legacyRecurrence = $legacyRecurrence;
 
         return $this;
     }

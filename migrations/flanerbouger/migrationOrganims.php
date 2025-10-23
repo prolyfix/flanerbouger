@@ -39,33 +39,37 @@ try {
      throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
-$legacyId_postcodes = $oldConnexion->query('SELECT c.city_id, p.postcode FROM city_postcode c JOIN postcodes p on c.postcode_id = p.id')->fetchAll(\PDO::FETCH_ASSOC);
-if (empty($legacyId_postcodes)) {
-    return;
-}
-$legacyId_postcodesMap = [];
-foreach ($legacyId_postcodes as $legacyId_postcode) {
-    $legacyId_postcodesMap[$legacyId_postcode['city_id']] = $legacyId_postcode['postcode'];
+
+$citiesMap = [];
+$citiesStmt = $newConnexion->query('SELECT id, legacy_id FROM city');
+while ($row = $citiesStmt->fetch()) {
+    $citiesMap[$row['legacy_id']] = $row['id'];
 }
 
-$cities = $newConnexion->query('SELECT * FROM city')->fetchAll(\PDO::FETCH_ASSOC);
-if (empty($cities)) {
-    return;
-}
 
 
 $iteration = 0;
 $sql= 'SET FOREIGN_KEY_CHECKS=0;';
 $newConnexion->exec($sql);
 $iteration = 0; 
-foreach ($cities as $city) {
-    if(isset($legacyId_postcodesMap[$city['legacy_id']])){
-        $placeholders[] = '(?, ?)';
-        $params[] = $city['id'];
-        $params[] = $legacyId_postcodesMap[$city['legacy_id']];
+$organisms = $oldConnexion->query('SELECT * FROM organisms')->fetchAll(\PDO::FETCH_ASSOC);
+foreach ($organisms as $organism) {
+    if(isset($citiesMap[$organism['city_id']])){
+        $placeholders[] = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params[] = $citiesMap[$organism['city_id']];
+        $params[] = $organism['name'];
+        $params[] = $organism['type'];
+        $params[] = $organism['id'];
+        $params[] = $organism['address'];
+        $params[] = $organism['phone'];
+        $params[] = $organism['email'];
+        $params[] = $organism['website'];
+        $params[] = $organism['created_at'];
+        $params[] = $organism['updated_at'];
+        $iteration++;
     }
     if($iteration > 100){
-        $sql = 'INSERT INTO postcode (city_id, code) VALUES ' . implode(', ', $placeholders);
+        $sql = 'INSERT INTO organism (city_id, name, type, legacy_id, legacy_adress, phone, email, website,creation_date,update_date ) VALUES ' . implode(', ', $placeholders);
 
         try {
             $newConnexion->beginTransaction();
@@ -81,6 +85,6 @@ foreach ($cities as $city) {
         $params = [];
         $iteration = 0;
     }
-    $iteration++;
+    
 }
 

@@ -31,6 +31,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $firstName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lastName = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $phone = null;
+
+    #[ORM\Column(length: 511, nullable: true)]
+    private ?string $legacyAdress = null;
+
+    #[ORM\ManyToOne]
+    private ?Location $location = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $creationDate = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $lastLogin = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $legacyOrganism = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $legacyId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,5 +137,113 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // @deprecated, to be removed when upgrading to Symfony 8
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): static
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): static
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): static
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getLegacyAdress(): ?string
+    {
+        return $this->legacyAdress;
+    }
+
+    public function setLegacyAdress(?string $legacyAdress): static
+    {
+        $this->legacyAdress = $legacyAdress;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): static
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getCreationDate(): ?\DateTime
+    {
+        return $this->creationDate;
+    }
+
+    public function setCreationDate(?\DateTime $creationDate): static
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    public function getLastLogin(): ?\DateTime
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?\DateTime $lastLogin): static
+    {
+        $this->lastLogin = $lastLogin;
+
+        return $this;
+    }
+
+    public function getLegacyOrganism(): ?string
+    {
+        return $this->legacyOrganism;
+    }
+
+    public function setLegacyOrganism(?string $legacyOrganism): static
+    {
+        $this->legacyOrganism = $legacyOrganism;
+
+        return $this;
+    }
+
+    public function getLegacyId(): ?int
+    {
+        return $this->legacyId;
+    }
+
+    public function setLegacyId(?int $legacyId): static
+    {
+        $this->legacyId = $legacyId;
+
+        return $this;
     }
 }
