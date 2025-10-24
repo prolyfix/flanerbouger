@@ -19,10 +19,15 @@
 
 														<select class="form-control form-select select-category" id="edit-field-category" placeholder="Categories" name="cat" style="width: 100%;">
 															<option value="All" selected="selected">Categories</option>
-															<optgroup label="<?=$cat0['title']?>">
-																<option value="<?=$cat0['id']?>" <?=(($cat0['id']==$selected)?'selected="selected"':'')?>><?=$cat0['title']?></option>
-																<option value="<?=$subcat['id']?>" <?=(($subcat['id']==$selected)?'selected="selected"':'')?>><?=$subcat['title']?></option>
-															</optgroup>
+															{% for group, categoriesSub in categories %}
+																{% for category in categoriesSub %}
+																	<optgroup label="{{group}}">
+																		{% for category in categoriesSub %}
+																			<option value="{{category.id}}">{{category.title}}</option>
+																		{% endfor %}
+																	</optgroup>
+																{% endfor %}
+															{% endfor %}
 														</select>
 													</div>
 												</div>
@@ -44,7 +49,7 @@
 
 												<div class="col-md-3">
 													<div class="form-group relative mt5px">
-														<input type="text" class="form-control w100 h40px" id="search-daterange" name="daterange" placeholder="A partir du - Jusqu'au" value="">
+														<input type="text" class="form-control w100 h40px" id="datetimerange-input1" name="daterange" placeholder="A partir du - Jusqu'au" value="">
 													</div>
 												</div>
 												<div class="col-md-1">

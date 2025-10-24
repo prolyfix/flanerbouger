@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Attribute as Vich;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+
 class Category
 {
     #[ORM\Id]
@@ -60,6 +63,9 @@ class Category
 
     #[ORM\Column(length: 511, nullable: true)]
     private ?string $pageTitle = null;
+
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ThumbnailFilename = null;

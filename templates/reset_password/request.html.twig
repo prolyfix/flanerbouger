@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password
+{% endblock %}
+{% block search_bar %}{% endblock %}
+{% block main %}
+	<div class="container" id="content-wrapper-container mt-3 mb-30">
+		<div class="row">
+			<div class="col-md-6">
+				<div id="content-wrapper">
+					<h1 class="page-title">Se connecter</h1>
+					<!-- #tabs -->
+					<!-- #tabs -->
+					<div class="tabs">
+						<ul class="tabs--primary nav nav-tabs">
+							<li>
+								<a href="inscription.php">Créer un compte</a>
+							</li>
+							<li>
+								<a href="connexion.php">Connectez-vous</a>
+							</li>
+							<li class="active">
+								<a href="mot-de-passe-oublie.php">Mot de passe oublie</a>
+							</li>
+						</ul>
+					</div>
+					<div class="region region-content">
+						<section id="block-system-main" class="block block-system clearfix clearfix">
+							{{ form_start(requestForm) }}
+							{{ form_row(requestForm.email,{attr: {class: 'form-control'}}) }}
+							<div>
+								<small>
+									Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+								</small>
+							</div>
+
+							<button class="btn btn-md button-success buthover v4">
+								<span class="fa fa-envelope"></span>
+								Envoyer le mot de passe reset</button>
+							{{ form_end(requestForm) }}
+						</section>
+					</div>
+				</div>
+				{% for flash_error in app.flashes('reset_password_error') %}
+					<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+				{% endfor %}
+
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

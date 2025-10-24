@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block main %}
+	<div class="container" id="content-wrapper-container mt-3 mb-30">
+		<div class="row">
+			<div class="col-md-6">
+				<div id="content-wrapper">
+					<h1 class="page-title">Enregistrement</h1>
+
+					<!-- #tabs -->
+					<div class="tabs">
+						<ul class="tabs--primary nav nav-tabs">
+							<li class="active">
+								<a href="inscription.php" class="ahoverbl">Créer un compte</a>
+							</li>
+							<li>
+								<a href="connexion.php">Connectez-vous</a>
+							</li>
+							<li>
+								<a href="mot-de-passe-oublie.php">Mot de passe oublié</a>
+							</li>
+						</ul>
+					</div>
+					<!-- EOF: #tabs -->
+
+					<div class="region region-content">
+						<section id="block-system-main" class="block block-system clearfix clearfix">
+
+							<div id="registerForm">
+								{% for flash_error in app.flashes('verify_email_error') %}
+									<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+								{% endfor %}
+								{{ form_errors(registrationForm) }}
+								{{ form_start(registrationForm) }}
+								{{ form_row(registrationForm.firstName) }}
+								{{ form_row(registrationForm.lastName) }}
+								{{ form_row(registrationForm.email) }}
+								{{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+								{{ form_row(registrationForm.agreeTerms) }}
+
+								<div class="form-group actions">
+									<p class="text-center">
+										<button class="btn btn-md button-success buthover v4">
+											<span class="fa fa-check"></span>
+											Je m'enregistre</button>
+									</p>
+								</div>
+								{{ form_end(registrationForm) }}
+
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -16,6 +16,18 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function getCountFutureByCategory($category): int
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->where('e.category = :category')
+            ->andWhere('e.startDate >= :now')
+            ->setParameter('category', $category)
+            ->setParameter('now', new \DateTime());
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */
