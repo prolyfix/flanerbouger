@@ -11,10 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'importer:migrate',
+    name: 'app:update-numbers',
     description: 'Add a short description for your command',
 )]
-class ImporterMigrateCommand extends Command
+class UpdateNumbersCommand extends Command
 {
     public function __construct()
     {

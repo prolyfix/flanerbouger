@@ -1,0 +1,67 @@
+<!-- <div class="container flash"></div>-->
+<div id="search-wrapper" class="clearfix">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="search-region" class="clearfix">
+					<div id="navbar-search-collapse">
+						<div class="region region-search">
+							<section id="block-views-exp-list-indexed-business-page" class="block block-views clearfix">
+								<form action="/votre-recherche.php" id="views-exposed-form-list-indexed-business-page" method="GET" class="eventssearch">
+									<div>
+										<div class="views-exposed-form">
+											<div class="row">
+												<div class="col-md-2">
+													<h2 class="block-title">La recherche</h2>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group mt5px">
+
+														<select class="form-control form-select select-category" id="edit-field-category" placeholder="Categories" name="cat" style="width: 100%;">
+															<option value="All" selected="selected">Categories</option>
+															<optgroup label="<?=$cat0['title']?>">
+																<option value="<?=$cat0['id']?>" <?=(($cat0['id']==$selected)?'selected="selected"':'')?>><?=$cat0['title']?></option>
+																<option value="<?=$subcat['id']?>" <?=(($subcat['id']==$selected)?'selected="selected"':'')?>><?=$subcat['title']?></option>
+															</optgroup>
+														</select>
+													</div>
+												</div>
+
+
+												<div class="col-md-3">
+													<div class="form-group relative fb-autocomplete citysearch mt5px">
+														<span class="autocomplete-loader fa fa-spinner fa-spin"></span>
+														<input type="text" name="maville" class="form-control w100 h40px citysearchval" placeholder="Villes" value=""/>
+														<input type="hidden" name="city" value="">
+														<input type="hidden" name="postcode" value="">
+														<div class="suggest">
+															<div class="response">
+																<ul class="suggest-results"></ul>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-3">
+													<div class="form-group relative mt5px">
+														<input type="text" class="form-control w100 h40px" id="search-daterange" name="daterange" placeholder="A partir du - Jusqu'au" value="">
+													</div>
+												</div>
+												<div class="col-md-1">
+													<div class="mt5px">
+														<button type="submit" value="Search" class="btn btn-primary form-submit submit">Allez-y</button>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

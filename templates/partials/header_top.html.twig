@@ -1,0 +1,59 @@
+<div id="header-top" class="clearfix">
+    <div class="container">
+        <!-- #header-top-inside -->
+        <div id="header-top-inside" class="clearfix">
+            <div class="row">
+				<div class="col-md-6 col-sm-7">
+                <!-- #header-top-left -->
+					<div id="header-top-left" class="clearfix">
+						<div class="region region-header-top-left">
+							<section id="block-system-user-menu" class="block block-system block-menu clearfix clearfix">
+								<ul class="menu nav">
+								{% if app.user is defined and app.user is not null %}
+									<li class="first leaf">
+										<div class="dropdown">
+										    <a href="#" class="dropdown-toggle" type="button" id="menu1" data-toggle="dropdown"><span class="fa fa-user"></span> {{ app.user.firstName}}
+										    <span class="caret"></span></a>
+										    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+										      <li role="presentation"><a role="menuitem" tabindex="-1" href="/dashboard/"><span class="fa fa-home"></span> Accueil</a></li>
+										      <li role="presentation" class="divider"></li>
+										      <li role="presentation"><a role="menuitem" tabindex="-1" href="/dashboard/events.php"><span class="fa fa-calendar"></span> Mes évènements</a></li>
+										      <li role="presentation"><a role="menuitem" tabindex="-1" href="/dashboard/profile.php"><span class="fa fa-user"></span> Mon profil</a></li>
+										      <li role="presentation" class="divider"></li>
+										      <li role="presentation"><a role="menuitem" tabindex="-1" href="/connexion.php?logout" onclick="fblogout();"><span class="fa fa-sign-out"></span> Déconnexion</a></a></li>
+										    </ul>
+									  	</div>
+									</li>
+								{% else %}
+									<li class="first leaf "><a href="/connexion.php"><span class="fa fa-sign-in"></span> Se connecter</a></li>
+									<li class="leaf"><a href="/inscription.php"><span class="fa fa-pencil"></span> S'enregistrer</a></li>
+								{% endif %}
+									<li class="last leaf"><a href="/creer-votre-evenement.php"  class="active-trail active v6"><span class="fa fa-plus"></span> Proposez une sortie</a></li>
+								</ul>
+							</section>
+						</div>
+					</div>
+                <!-- EOF:#header-top-left -->
+				</div>
+				<div class="col-md-6 col-sm-5">
+				<!-- #header-top-right -->
+					<div id="header-top-right" class="clearfix">
+						<div class="region region-header-top-right">
+							<section id="block-block-5" class="block block-block clearfix clearfix">
+								<ul class="list-social-icons">
+									<li><a href="https://fr.jooble.org/emploi-freelance-évènementiel" title="Votre nouvel emploi, offres disponibles dans toute la France" target="_blank" >Jooble</a></li>
+									<li>Nous suivre </li>
+									<li><a href="https://www.facebook.com/flanez.bougez/" title="Facebook" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="https://twitter.com/flanezbougez" title="Twitter" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="mailto:contact@flanerbouger.fr" title="Contact"><i class="fa fa-envelope-o"></i></a></li>
+								</ul>
+							</section>
+						</div>
+					</div>
+                <!-- EOF:#header-top-right -->
+				</div>
+			</div>
+        </div>
+        <!-- EOF: #header-top-inside -->
+    </div>
+</div>

@@ -61,6 +61,15 @@ class Category
     #[ORM\Column(length: 511, nullable: true)]
     private ?string $pageTitle = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ThumbnailFilename = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $count = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $position = null;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -260,6 +269,42 @@ class Category
     public function setPageTitle(?string $pageTitle): static
     {
         $this->pageTitle = $pageTitle;
+
+        return $this;
+    }
+
+    public function getThumbnailFilename(): ?string
+    {
+        return $this->ThumbnailFilename;
+    }
+
+    public function setThumbnailFilename(?string $ThumbnailFilename): static
+    {
+        $this->ThumbnailFilename = $ThumbnailFilename;
+
+        return $this;
+    }
+
+    public function getCount(): ?int
+    {
+        return $this->count;
+    }
+
+    public function setCount(?int $count): static
+    {
+        $this->count = $count;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): static
+    {
+        $this->position = $position;
 
         return $this;
     }
