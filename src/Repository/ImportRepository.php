@@ -16,6 +16,16 @@ class ImportRepository extends ServiceEntityRepository
         parent::__construct($registry, Import::class);
     }
 
+    public function findAllActiveImports(): array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.isActive = :active')
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Import[] Returns an array of Import objects
 //     */

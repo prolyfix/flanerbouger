@@ -27,29 +27,17 @@ class EventRepository extends ServiceEntityRepository
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
+    public function getFutureByCategory($category, $limit, $offset): array
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.category = :category')
+            ->andWhere('e.startDate >= :now')
+            ->setParameter('category', $category)
+            ->setParameter('now', new \DateTime())
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->orderBy('e.startDate', 'ASC');
 
-//    /**
-//     * @return Event[] Returns an array of Event objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Event
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return $qb->getQuery()->getResult();
+    }
 }

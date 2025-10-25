@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\City;
 use App\Entity\Department;
 use App\Entity\Event;
+use App\Entity\Import;
 use App\Entity\Organism;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -39,8 +40,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Organism', 'fas fa-frog', Organism::class);
+        yield MenuItem::section('Import');
+        yield MenuItem::linkTOCrud('Import Events', 'fas fa-file-import', Import::class);
         yield MenuItem::section('Actions');
+
 
         yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt');
     }
+
 }
